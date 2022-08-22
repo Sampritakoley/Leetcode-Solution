@@ -19,7 +19,7 @@ class Solution
             {
                 right--;
             }
-            else if(convt(s.charAt(left))!=convt(s.charAt(right)))
+            else if(s.charAt(left)!=s.charAt(right))
             {
                 return false;
             }
@@ -40,17 +40,6 @@ class Solution
         else
         {
             return false;
-        }
-    }
-     private char convt(char ch)
-    {
-        if(ch>='a' && ch<='z' ||ch>='0' && ch<='9')
-        {
-            return ch;
-        }
-        else
-        {
-            return (char)((int)ch+32);
         }
     }
     
