@@ -1,41 +1,25 @@
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-         List<List<Integer>> res=new ArrayList<>();
-        List<Integer> list=new ArrayList<>();
-        findCombination(list, res, target, candidates);
-        System.out.println(res);
-        Set<List<Integer>> resultSet = new HashSet<>();
-        for(int i=0;i<res.size();i++)
-        {
-            Collections.sort(res.get(i));
-            if(!resultSet.contains(res.get(i))){
-                 resultSet.add(res.get(i));
-            }
-        }
-        res.clear();
-        res.addAll(resultSet);
+        
+        ArrayList<List<Integer>> res=new ArrayList<List<Integer>>();
+        backtrack(candidates,0,target,new ArrayList<>(),res);
         return res;
     }
-    public static void findCombination(List<Integer> list, List<List<Integer>> res,int totalsum,int[] candidates)
+     private void backtrack(int[] candidates,int start,int target,List<Integer> list, List<List<Integer>> res)
     {
-        if(totalsum<0)
+        if(target<0)
         {
             return;
         }
-        if(totalsum==0)
+        if(target==0)
         {
-            res.add(new ArrayList<>(list));
-            return;
+            res.add(new ArrayList(list));
         }
-        for(int i=0;i<candidates.length;i++)
+        for(int i=start;i<candidates.length;i++)
         {
-            int val=candidates[i];
-            list.add(val);
-            totalsum=totalsum-val;
-            findCombination(list, res, totalsum, candidates);
-            totalsum=totalsum+list.get(list.size()-1);
+            list.add(candidates[i]);
+            backtrack(candidates,i,target-candidates[i],list,res);
             list.remove(list.size()-1);
         }
-        return;
     }
 }
